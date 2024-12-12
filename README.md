@@ -20,7 +20,8 @@ To run this project, follow these steps:
    cd <your-repo-name>
 
 2. Compile the Code:
+   ''' bash
    gcc -o toy_projector_firmware toy_projector_firmware.c
 
-3. Run the Program:
+4. Run the Program:
    ./toy_projector_firmware
