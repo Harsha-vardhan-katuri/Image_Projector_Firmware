@@ -1,6 +1,6 @@
-# Toy Projector Firmware
+# Image Projector Firmware
 
-This project is a simple implementation of a **Toy Projector Firmware** written in C. It simulates receiving and processing image data packets sent to the firmware, which can be displayed as ASCII art or any other image-like representation.
+This project is a simple implementation of a **Image Projector Firmware** written in C. It simulates receiving and processing image data packets sent to the firmware, which can be displayed as ASCII art or any other image-like representation.
 
 ## Features
 
