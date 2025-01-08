@@ -21,8 +21,8 @@ To run this project, follow these steps:
 
 2. Compile the Code:
    ```bash
-   gcc -o toy_projector_firmware toy_projector_firmware.c
+   gcc -o Image_projector_firmware Image_projector_firmware.c
    
 3. Run the Program:
     ```bash
-   ./toy_projector_firmware
+   ./Image_projector_firmware
