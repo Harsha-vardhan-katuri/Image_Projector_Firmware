@@ -12,7 +12,7 @@ Each packet follows the defined structure:
 | Packet Length | 1 byte | Total packet size in bytes. |
 | Packet Number | 2 bytes | Order of the packet (MSB first). |
 | Total Image Size | 2 bytes | Total size of the image (MSB first). |
-| Payload | Variable | Image data. |
+| Payload | Payload size depends on packet length | Image data. |
 | CRC-16/XMODEM | 2 bytes | Checksum computed over Packet Length, Packet Number, Total Image Size, and Payload (MSB first). |
 | Footer | 1 byte | Fixed value `0xD7`, marks the end of the packet. |
 
@@ -47,4 +47,28 @@ The provided code follows these steps:
 ## Dependencies
 - CRC-16/XMODEM checksum calculation.
 - USB data reception handling.
+
+
+## How to Clone the Repository
+To get a local copy of the project, use the following command:
+```sh
+git clone <repository_url>
+```
+
+## How to Compile
+Ensure you have a C/C++ compiler installed (e.g., GCC). Navigate to the project directory and compile the code using:
+```sh
+gcc -o image_receiver image_receiver.c
+```
+
+## How to Run
+Run the compiled executable:
+```sh
+./image_receiver
+```
+
+This will start listening for image packets and process them accordingly.
+
+
+
 
