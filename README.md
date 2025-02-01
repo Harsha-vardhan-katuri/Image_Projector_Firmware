@@ -1,4 +1,4 @@
-# Image Receiver - README
+# Image Projector Firmware - README
 
 ## Overview
 This project involves receiving image data packets transmitted over a USB connection to a toy projector with limited memory. The image is transmitted in multiple packets, and the receiver must validate each packet, reconstruct the image, and store it in memory. If any packet is lost or corrupted, the entire image transmission is discarded.
@@ -58,13 +58,13 @@ git clone <repository_url>
 ## How to Compile
 Ensure you have a C/C++ compiler installed (e.g., GCC). Navigate to the project directory and compile the code using:
 ```sh
-gcc -o image_receiver image_receiver.c
+gcc -o Image_projector_firmware Image_projector_firmware.c
 ```
 
 ## How to Run
 Run the compiled executable:
 ```sh
-./image_receiver
+./Image_projector_firmware
 ```
 
 This will start listening for image packets and process them accordingly.
