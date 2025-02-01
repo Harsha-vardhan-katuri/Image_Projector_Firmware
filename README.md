@@ -1,37 +1,50 @@
-# Toy Projector Firmware
+# Image Receiver - README
 
-This project is a firmware for a toy projector that receives image data in chunks. It processes and displays the received image data. The firmware checks the validity of the received packet, extracts the image data, and displays it.
+## Overview
+This project involves receiving image data packets transmitted over a USB connection to a toy projector with limited memory. The image is transmitted in multiple packets, and the receiver must validate each packet, reconstruct the image, and store it in memory. If any packet is lost or corrupted, the entire image transmission is discarded.
 
-## Features
+## Packet Structure
+Each packet follows the defined structure:
 
-- **Packet Validation:** Checks the packet header for validity.
-- **Image Data Handling:** Receives and displays image data in chunks.
-- **System Clear:** Clears the screen before displaying new image data.
-- **Image Data Output:** Outputs received image data to the console.
+| Field | Size | Description |
+|--------|------|-------------|
+| Header | 1 byte | Fixed value `0x7D`, marks the beginning of the packet. |
+| Packet Length | 1 byte | Total packet size in bytes. |
+| Packet Number | 2 bytes | Order of the packet (MSB first). |
+| Total Image Size | 2 bytes | Total size of the image (MSB first). |
+| Payload | Variable | Image data. |
+| CRC-16/XMODEM | 2 bytes | Checksum computed over Packet Length, Packet Number, Total Image Size, and Payload (MSB first). |
+| Footer | 1 byte | Fixed value `0xD7`, marks the end of the packet. |
 
-## Requirements
+## Error Handling
+- If a packet is missing or contains an invalid CRC, the entire image transmission is aborted.
+- The `eraseImageData()` function is called when receiving the first packet to clear memory.
+- The `saveImageData()` function is used to store received valid packets.
+- The function `imageReceiver()` is invoked for every received packet to process it.
 
-- A C compiler like `gcc` or an Integrated Development Environment (IDE) like Code::Blocks or Visual Studio Code.
-- Basic knowledge of embedded systems and C programming.
+## Code Implementation
+The provided code follows these steps:
+1. **Packet Validation:**
+   - Check for valid `Header` (`0x7D`) and `Footer` (`0xD7`).
+   - Validate `CRC-16/XMODEM` checksum.
+2. **Handling First Packet:**
+   - Erase memory (`eraseImageData()`) when the first packet (packet number `1`) is received.
+3. **Image Assembly:**
+   - Store valid packets in memory (`saveImageData()`).
+4. **Error Handling:**
+   - If an error occurs (corrupt packet, missing packet, invalid CRC), erase image memory and discard remaining packets.
 
-## Functions
+### Function Breakdown
+- `eraseImageData()`: Clears memory before receiving a new image.
+- `saveImageData(payload)`: Saves the valid image data received.
+- `imageReceiver(packet)`: Processes each received packet, validates it, extracts image data, and stores it if valid.
 
-### 1. `eraseImageData()`
-Clears the console screen to prepare for new data.
+### Example Flow
+1. The first packet arrives, triggering `eraseImageData()`.
+2. Each subsequent packet is validated and stored using `saveImageData()`.
+3. If a packet is corrupt or missing, `eraseImageData()` is called to discard the entire image.
 
-### 2. `saveImageData(uint8_t *imageDataChunk, uint16_t imageDataChunkLength)`
-Saves a chunk of image data and outputs it to the console.
+## Dependencies
+- CRC-16/XMODEM checksum calculation.
+- USB data reception handling.
 
-### 3. `imageReceiver(uint8_t *receivedBytes)`
-Receives a packet of data and validates its header. If valid, it extracts the image data and calls `saveImageData` to handle it.
-
-## Running the Project
-
-### Step 1: Clone or Download the Project
-
-You can clone the repository using Git or download the project files directly to your machine.
-
-To clone the repository:
-
-```bash
-git clone https://your-repository-url.git
