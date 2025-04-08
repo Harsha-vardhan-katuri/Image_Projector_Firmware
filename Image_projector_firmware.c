@@ -2,7 +2,6 @@
 #include <stdint.h>
 #include <stdlib.h>
 
-
 void eraseImageData() {
     system("clear");
 }
