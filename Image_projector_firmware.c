@@ -3,7 +3,7 @@
 #include <stdlib.h>
 
 void eraseImageData() {
-    system("clear");
+    system("clear"); 
 }
 void saveImageData(uint8_t *imageDataChunk, uint16_t imageDataChunkLength) {
     
