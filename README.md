@@ -69,6 +69,8 @@ Run the compiled executable:
 
 This will start listening for image packets and process them accordingly.
 
+## License
+This project is released under the MIT License.
 
-
-
+## Contributors
+- Harsha Vardhan Katuri
