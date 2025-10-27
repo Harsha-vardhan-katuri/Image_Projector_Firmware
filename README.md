@@ -73,4 +73,4 @@ This will start listening for image packets and process them accordingly.
 This project is released under the MIT License.
 
 ## Contributors
-- Katuri Harsha Vardhan
+- Harsha Vardhan
