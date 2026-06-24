@@ -1,6 +1,11 @@
 # Toy Projector Firmware
 
-A modular **Embedded C firmware simulation** that demonstrates a packet-based image receiver pipeline for a toy projector. The project implements packet parsing, validation, image rendering, and unit testing using a layered firmware architecture.
+![Build](https://github.com/Harsha-vardhan-katuri/Image_Projector_Firmware/actions/workflows/build.yml/badge.svg)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
+![Language](https://img.shields.io/badge/C-C11-blue.svg)
+![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux-orange.svg)
+
+A modular **Embedded C firmware simulation** demonstrating a packet-based image receiver pipeline for a toy projector device. The project showcases packet parsing, validation, image rendering, unit testing, automated CI/CD using GitHub Actions, and API documentation using Doxygen.
 
 ---
 
@@ -11,14 +16,73 @@ A modular **Embedded C firmware simulation** that demonstrates a packet-based im
 * Image payload rendering
 * Defensive error handling
 * Unit testing without external frameworks
-* Cross-platform build using Makefile (GCC/MinGW)
+* Cross-platform Makefile support
+* GitHub Actions CI pipeline
+* Doxygen API documentation
+* MIT Licensed
+
+---
+
+# Project Demonstration
+
+## Firmware Simulation Output
+
+The firmware simulator processes packetized image data and renders the resulting ASCII-art image.
+
+<p align="center">
+  <img src="assets/terminal_output.png" alt="Firmware Simulation Output" width="900">
+</p>
+
+---
+
+## Unit Test Results
+
+Custom unit tests validate packet parsing, protocol validation, and error handling.
+
+<p align="center">
+  <img src="assets/test_packet.png" alt="Unit Test Results" width="900">
+</p>
+
+---
+
+## Continuous Integration (GitHub Actions)
+
+Every push automatically builds the project and executes unit tests using GitHub Actions.
+
+<p align="center">
+  <img src="assets/github_actions.png" alt="GitHub Actions CI" width="900">
+</p>
+
+---
+
+## Doxygen Documentation
+
+API documentation is automatically generated using Doxygen.
+
+<p align="center">
+  <img src="assets/doxygen_docs.png" alt="Doxygen Documentation" width="900">
+</p>
 
 ---
 
 ## Project Structure
 
-```
+```text
 Image_Projector_Firmware/
+│
+├── .github/
+│   └── workflows/
+│       └── build.yml
+│
+├── assets/
+│   ├── terminal_output.png
+│   ├── test_packet.png
+│   ├── github_actions.png
+│   └── doxygen_docs.png
+│
+├── docs/
+│   └── html/
+│
 ├── include/
 │   ├── image.h
 │   ├── packet.h
@@ -33,9 +97,10 @@ Image_Projector_Firmware/
 ├── tests/
 │   └── test_packet.c
 │
-├── build/
-├── Makefile
 ├── .gitignore
+├── Doxyfile
+├── LICENSE
+├── Makefile
 └── README.md
 ```
 
@@ -43,7 +108,7 @@ Image_Projector_Firmware/
 
 ## Firmware Architecture
 
-```
+```text
                  Incoming Packet
                         │
                         ▼
@@ -80,25 +145,25 @@ Image_Projector_Firmware/
 
 ## Build Instructions
 
-### Build Firmware
+### Build Project
 
 ```bash
 make
 ```
 
-### Run Firmware
+### Run Firmware Simulation
 
 ```bash
 make run
 ```
 
-### Run Unit Tests
+### Execute Unit Tests
 
 ```bash
 make test
 ```
 
-### Clean Build Files
+### Clean Build Artifacts
 
 ```bash
 make clean
@@ -106,14 +171,58 @@ make clean
 
 ---
 
-## Project Highlights
+## Unit Testing
 
-* Designed a layered firmware architecture by separating packet processing, receiver logic, and image rendering into independent modules.
-* Implemented packet validation using Start-of-Frame (SOF), End-of-Frame (EOF), payload length, and sequence checking.
-* Developed reusable APIs using `const`-correct function interfaces.
-* Added defensive programming techniques including NULL pointer validation and error handling.
-* Built a lightweight unit test framework using custom assertion macros without external libraries.
-* Organized the project using industry-standard directory structure (`src/`, `include/`, `tests/`, `build/`).
+The project includes a lightweight custom test framework that validates:
+
+* Packet header validation
+* Null pointer handling
+* Payload length validation
+* Error status reporting
+* Packet parser functionality
+
+Run tests using:
+
+```bash
+make test
+```
+
+---
+
+## Continuous Integration
+
+GitHub Actions automatically:
+
+* Builds the project
+* Compiles all modules
+* Runs unit tests
+* Verifies repository health
+
+Workflow location:
+
+```text
+.github/workflows/build.yml
+```
+
+---
+
+## Documentation
+
+API documentation is generated using Doxygen.
+
+Generate documentation:
+
+```bash
+doxygen Doxyfile
+```
+
+Open:
+
+```text
+docs/html/index.html
+```
+
+to browse the generated API documentation.
 
 ---
 
@@ -123,19 +232,43 @@ make clean
 * GCC / MinGW
 * Makefile
 * Git & GitHub
+* GitHub Actions
+* Doxygen
 * Unit Testing
-* Modular Firmware Design
+
+---
+
+## Key Concepts Demonstrated
+
+* Layered firmware architecture
+* Packet-based communication
+* Defensive programming
+* Enum-based error handling
+* Modular software design
+* Automated build validation
+* Documentation-driven development
+* Cross-platform build support
 
 ---
 
 ## Future Improvements
 
 * CRC-16 packet verification
+* UART communication simulation
+* Circular receive buffer
 * Packet retransmission support
-* DMA-based packet reception
-* UART driver integration
+* State-machine packet parser
 * Frame buffer implementation
-* RTOS task-based packet processing
+* DMA-based transfer simulation
+* FreeRTOS task integration
+
+---
+
+## License
+
+This project is licensed under the MIT License.
+
+See the LICENSE file for details.
 
 ---
 
@@ -143,4 +276,4 @@ make clean
 
 **Katuri Harsha Vardhan**
 
-Firmware Engineer | Embedded Systems | Embedded C | Microcontrollers | Communication Protocols
+Firmware Engineer | Embedded Systems | Embedded C | Communication Protocols | Embedded Software Development
