@@ -1,0 +1,19 @@
+# Build directory
+build/
+
+# Executables
+*.exe
+*.out
+
+# Object files
+*.o
+*.obj
+
+# Debug symbols
+*.pdb
+
+# VS Code
+.vscode/
+
+# Visual Studio
+.vs/
