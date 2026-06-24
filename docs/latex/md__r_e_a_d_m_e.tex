@@ -1,0 +1,155 @@
+\chapter{Toy Projector Firmware }
+\hypertarget{md__r_e_a_d_m_e}{}\label{md__r_e_a_d_m_e}\index{Toy Projector Firmware@{Toy Projector Firmware}}
+\label{md__r_e_a_d_m_e_autotoc_md0}%
+\Hypertarget{md__r_e_a_d_m_e_autotoc_md0}%
+
+
+A modular {\bfseries{Embedded C firmware simulation}} that demonstrates a packet-\/based image receiver pipeline for a toy projector. The project implements packet parsing, validation, image rendering, and unit testing using a layered firmware architecture.
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md2}{}\doxysection{\texorpdfstring{Features}{Features}}\label{md__r_e_a_d_m_e_autotoc_md2}
+
+\begin{DoxyItemize}
+\item Modular firmware architecture
+\item Packet parsing and validation
+\item Image payload rendering
+\item Defensive error handling
+\item Unit testing without external frameworks
+\item Cross-\/platform build using Makefile (GCC/\+\+Min\+GW)
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md4}{}\doxysection{\texorpdfstring{Project Structure}{Project Structure}}\label{md__r_e_a_d_m_e_autotoc_md4}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{Image\_Projector\_Firmware/}
+\DoxyCodeLine{├──\ include/}
+\DoxyCodeLine{│\ \ \ ├──\ image.h}
+\DoxyCodeLine{│\ \ \ ├──\ packet.h}
+\DoxyCodeLine{│\ \ \ └──\ receiver.h}
+\DoxyCodeLine{│}
+\DoxyCodeLine{├──\ src/}
+\DoxyCodeLine{│\ \ \ ├──\ image.c}
+\DoxyCodeLine{│\ \ \ ├──\ main.c}
+\DoxyCodeLine{│\ \ \ ├──\ packet.c}
+\DoxyCodeLine{│\ \ \ └──\ receiver.c}
+\DoxyCodeLine{│}
+\DoxyCodeLine{├──\ tests/}
+\DoxyCodeLine{│\ \ \ └──\ test\_packet.c}
+\DoxyCodeLine{│}
+\DoxyCodeLine{├──\ build/}
+\DoxyCodeLine{├──\ Makefile}
+\DoxyCodeLine{├──\ .gitignore}
+\DoxyCodeLine{└──\ README.md}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md6}{}\doxysection{\texorpdfstring{Firmware Architecture}{Firmware Architecture}}\label{md__r_e_a_d_m_e_autotoc_md6}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Incoming\ Packet}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ▼}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ receiver\_handle\_packet()}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ▼}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ packet\_parse()}
+\DoxyCodeLine{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ ┌───────────────┴───────────────┐}
+\DoxyCodeLine{\ \ \ \ \ \ \ │\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ Validate\ Packet\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Report\ Error}
+\DoxyCodeLine{\ \ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ ▼}
+\DoxyCodeLine{\ image\_save\_chunk()}
+\DoxyCodeLine{\ \ \ \ \ \ \ │}
+\DoxyCodeLine{\ \ \ \ \ \ \ ▼}
+\DoxyCodeLine{Display\ Image\ Payload}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md8}{}\doxysection{\texorpdfstring{Packet Format}{Packet Format}}\label{md__r_e_a_d_m_e_autotoc_md8}
+
+\begin{DoxyTable}{4}{}{}{1}
+\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Offset  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Field  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Size  &\SetCell{c,bg=\tableheadbgcolor,font=\bfseries}Description  \\
+0  &SOF  &1 Byte  &Start of Frame (0x7D)  \\
+1  &LEN  &1 Byte  &Payload Length  \\
+2-\/3  &SEQ  &2 Bytes  &Sequence Number  \\
+4-\/5  &CH1 /\+ CH2  &2 Bytes  &Control Bytes  \\
+6-\/N  &PAYLOAD  &N Bytes  &Image Data  \\
+Last  &EOF  &1 Byte  &End of Frame (0x\+D7)  \\
+\end{DoxyTable}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md10}{}\doxysection{\texorpdfstring{Build Instructions}{Build Instructions}}\label{md__r_e_a_d_m_e_autotoc_md10}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md11}{}\doxysubsection{\texorpdfstring{Build Firmware}{Build Firmware}}\label{md__r_e_a_d_m_e_autotoc_md11}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md12}{}\doxysubsection{\texorpdfstring{Run Firmware}{Run Firmware}}\label{md__r_e_a_d_m_e_autotoc_md12}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make\ run}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md13}{}\doxysubsection{\texorpdfstring{Run Unit Tests}{Run Unit Tests}}\label{md__r_e_a_d_m_e_autotoc_md13}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make\ test}
+
+\end{DoxyCode}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md14}{}\doxysubsection{\texorpdfstring{Clean Build Files}{Clean Build Files}}\label{md__r_e_a_d_m_e_autotoc_md14}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{make\ clean}
+
+\end{DoxyCode}
+
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md16}{}\doxysection{\texorpdfstring{Project Highlights}{Project Highlights}}\label{md__r_e_a_d_m_e_autotoc_md16}
+
+\begin{DoxyItemize}
+\item Designed a layered firmware architecture by separating packet processing, receiver logic, and image rendering into independent modules.
+\item Implemented packet validation using Start-\/of-\/\+Frame (SOF), End-\/of-\/\+Frame (EOF), payload length, and sequence checking.
+\item Developed reusable APIs using {\ttfamily const}-\/correct function interfaces.
+\item Added defensive programming techniques including NULL pointer validation and error handling.
+\item Built a lightweight unit test framework using custom assertion macros without external libraries.
+\item Organized the project using industry-\/standard directory structure ({\ttfamily src/\+}, {\ttfamily include/\+}, {\ttfamily tests/\+}, {\ttfamily build/\+}).
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md18}{}\doxysection{\texorpdfstring{Technologies Used}{Technologies Used}}\label{md__r_e_a_d_m_e_autotoc_md18}
+
+\begin{DoxyItemize}
+\item Embedded C (C11)
+\item GCC /\+ Min\+GW
+\item Makefile
+\item Git \& Git\+Hub
+\item Unit Testing
+\item Modular Firmware Design
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md20}{}\doxysection{\texorpdfstring{Future Improvements}{Future Improvements}}\label{md__r_e_a_d_m_e_autotoc_md20}
+
+\begin{DoxyItemize}
+\item CRC-\/16 packet verification
+\item Packet retransmission support
+\item DMA-\/based packet reception
+\item UART driver integration
+\item Frame buffer implementation
+\item RTOS task-\/based packet processing
+\end{DoxyItemize}
+
+\DoxyHorRuler{0}
+\hypertarget{md__r_e_a_d_m_e_autotoc_md22}{}\doxysection{\texorpdfstring{Author}{Author}}\label{md__r_e_a_d_m_e_autotoc_md22}
+{\bfseries{Katuri Harsha Vardhan}}
+
+Firmware Engineer \texorpdfstring{$\vert$}{|} Embedded Systems \texorpdfstring{$\vert$}{|} Embedded C \texorpdfstring{$\vert$}{|} Microcontrollers \texorpdfstring{$\vert$}{|} Communication Protocols 
