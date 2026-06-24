@@ -4,6 +4,10 @@
 ![License](https://img.shields.io/badge/License-MIT-green.svg)
 ![Language](https://img.shields.io/badge/C-C11-blue.svg)
 ![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux-orange.svg)
+![Build](https://img.shields.io/badge/Build-Makefile-orange)
+![Documentation](https://img.shields.io/badge/Documentation-Doxygen-blueviolet)
+![Tests](https://img.shields.io/badge/Tests-Passing-brightgreen)
+![Embedded](https://img.shields.io/badge/Domain-Embedded%20Systems-red)
 
 A modular **Embedded C firmware simulation** demonstrating a packet-based image receiver pipeline for a toy projector device. The project showcases packet parsing, validation, image rendering, unit testing, automated CI/CD using GitHub Actions, and API documentation using Doxygen.
 
