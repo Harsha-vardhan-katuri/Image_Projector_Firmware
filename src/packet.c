@@ -1,6 +1,27 @@
+/**
+ * @file packet.c
+ * @brief Packet parser implementation.
+ *
+ * Implements packet validation, payload length extraction,
+ * and packet status reporting for the Toy Projector Firmware.
+ *
+ * @author Katuri Harsha Vardhan
+ * @date 2026
+ */
 #include "packet.h"
 #include <stdio.h>
 
+/**
+ * @brief Validate a received packet.
+ *
+ * Checks the packet header and payload length before returning
+ * the payload size.
+ *
+ * @param buf Pointer to the received packet.
+ * @param out_len Returns the payload length.
+ *
+ * @return PacketStatus indicating the validation result.
+ */
 PacketStatus packet_parse(const uint8_t *buf, uint8_t *out_len)
 {
     if (buf == NULL || out_len == NULL) {

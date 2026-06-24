@@ -1,9 +1,13 @@
 /**
- * @file   main.c
- * @brief  Toy Projector Firmware — host simulation entry point.
+ * @file main.c
+ * @brief Toy Projector Firmware host simulation.
  *
- * Feeds pre-recorded packet frames through the receiver pipeline
- * and renders the resulting ASCII-art image to the terminal.
+ * Demonstrates the firmware packet-processing pipeline by feeding
+ * pre-recorded packet frames through the receiver module and
+ * rendering the resulting ASCII-art image in the terminal.
+ *
+ * @author Katuri Harsha Vardhan
+ * @date 2026
  */
 
 #include <stdio.h>
